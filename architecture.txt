@@ -1,0 +1,33 @@
+OUT-OF-BAND VERIFICATION V0.1
+
+PRE-REGISTERED PERSON
+ ID / callback / challenge records
+        |
+        +---------------------+
+        |                     |
+        v                     v
+ CHALLENGE PATH          CALLBACK PATH
+ PBKDF2-SHA256           ignore inbound contact
+ compare answer          use stored callback only
+        |                random 192-bit token
+        |                bounded expiry
+        |                HMAC-SHA256 session seal
+        |                     |
+        |                     v
+        |                caller performs callback
+        |                     |
+        |                     v
+        |                verify seal first
+        |                then expiry/person/token/
+        |                connected
+        |                     |
+        +----------+----------+
+                   v
+             VERIFIED / DENIED
+
+DEPLOYMENT OWNS OOB_SESSION_KEY
+NO TELEPHONY
+NO BIOMETRICS
+NO DEEPFAKE DETECTION
+NO CONTACT ENROLMENT
+NO BUSINESS-ACTION APPROVAL
