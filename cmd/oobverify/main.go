@@ -21,7 +21,6 @@ type input struct {
 	Session        *oob.Session `json:"session,omitempty"`
 	Token          string       `json:"token,omitempty"`
 	Connected      bool         `json:"connected,omitempty"`
-	Now            *time.Time   `json:"now,omitempty"`
 }
 
 func main() {
@@ -44,9 +43,6 @@ func main() {
 		bad(fmt.Errorf("invalid input"))
 	}
 	now := time.Now().UTC()
-	if x.Now != nil {
-		now = *x.Now
-	}
 	switch x.Operation {
 	case "challenge":
 		r, e := oob.VerifyChallenge(x.Person, x.Prompt, x.Answer)
